@@ -15,7 +15,10 @@ const updateGoalSchema = z.object({
 });
 
 export function listGoals(req, res) {
-  res.json(getGoals(req.user.id));
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const result = getGoals(req.user.id, page, limit);
+  res.json(result);
 }
 
 export function addGoal(req, res, next) {

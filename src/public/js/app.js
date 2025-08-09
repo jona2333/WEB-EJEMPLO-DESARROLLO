@@ -1,4 +1,4 @@
-import { api, setToken } from './api.js';
+import { api, setToken, setRefreshToken } from './api.js';
 import { showAppUI, showAuthUI, showView, showToast } from './views.js';
 
 document.getElementById('nav').addEventListener('click', e=>{
@@ -7,6 +7,7 @@ document.getElementById('nav').addEventListener('click', e=>{
 
 document.getElementById('logoutBtn').addEventListener('click',()=>{
   setToken(null);
+  setRefreshToken(null);
   showToast('Sesión cerrada', 'info');
   showAuthUI();
 });
@@ -22,8 +23,9 @@ registerForm.addEventListener('submit', async e=>{
   msg.textContent='...';
   
   try{
-    const { token }=await api.register(email,password);
+    const { token, refreshToken }=await api.register(email,password);
     setToken(token);
+    setRefreshToken(refreshToken);
     showToast('¡Registrado exitosamente!', 'success');
     msg.textContent='Registrado';
     showAppUI();
@@ -41,8 +43,9 @@ loginForm.addEventListener('submit', async e=>{
   msg.textContent='...';
   
   try{
-    const { token }=await api.login(email,password);
+    const { token, refreshToken }=await api.login(email,password);
     setToken(token);
+    setRefreshToken(refreshToken);
     showToast('¡Bienvenido!', 'success');
     msg.textContent='Bienvenido';
     showAppUI();
