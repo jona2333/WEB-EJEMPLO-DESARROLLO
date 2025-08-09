@@ -1,0 +1,33 @@
+/* (Mismo CSS anterior resumido por brevedad, puedes copiar el completo de la versión previa) */
+:root {
+  --bg:#12181f;--panel:#1d2733;--accent:#4dabf7;--accent-alt:#a78bfa;--text:#f0f4f8;
+  --danger:#ef4444;--radius:10px;
+  --font-stack:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:var(--font-stack);background:#0e141a;color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+header{background:#1d2733;padding:1rem 1.2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;border-bottom:1px solid #22313f;}
+h1{margin:0;font-size:1.2rem;background:linear-gradient(90deg,var(--accent),var(--accent-alt));-webkit-background-clip:text;color:transparent;}
+nav button{background:#243444;color:var(--text);border:1px solid #314458;padding:.55rem .9rem;border-radius:8px;cursor:pointer;}
+nav button:hover{background:#2f4256;}
+main{flex:1;width:min(1200px,100%);margin:0 auto;padding:1rem;}
+.auth-forms{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+form{display:flex;flex-direction:column;gap:.6rem;background:#1d2733;padding:1rem 1.1rem 1.3rem;border-radius:var(--radius);border:1px solid #243342;}
+input,textarea,select,button{font:inherit;}
+input,textarea,select{background:#253444;border:1px solid #314458;border-radius:6px;padding:.6rem .7rem;color:var(--text);outline:none;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);}
+textarea{resize:vertical;min-height:90px;}
+button{background:linear-gradient(135deg,var(--accent),var(--accent-alt));border:none;color:#fff;padding:.6rem .9rem;border-radius:6px;cursor:pointer;font-weight:600;}
+.hidden{display:none!important;}
+ul{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.7rem;}
+.card,ul>li{background:#1d2733;border:1px solid #243342;padding:.9rem 1rem;border-radius:var(--radius);position:relative;}
+.cards{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:2rem;}
+.metric{font-size:.7rem;opacity:.75;}
+.value{font-size:1.8rem;font-weight:600;background:linear-gradient(90deg,var(--accent),var(--accent-alt));-webkit-background-clip:text;color:transparent;}
+.badge{display:inline-block;background:#243444;padding:.2rem .5rem;border-radius:4px;font-size:.6rem;text-transform:uppercase;margin-right:.3rem;}
+.status-progress{width:100%;height:8px;background:#243444;border-radius:4px;margin-top:.4rem;overflow:hidden;position:relative;}
+.status-progress span{position:absolute;inset:0;background:linear-gradient(90deg,var(--accent),var(--accent-alt));width:0;transition:width .4s;}
+.action-buttons{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;}
+.action-buttons button{background:#2c3f52;border:1px solid #314458;padding:.4rem .6rem;font-size:.65rem;}
+.action-buttons button.danger{background:var(--danger);border:none;}
+footer{text-align:center;padding:1rem;font-size:.7rem;opacity:.5;}

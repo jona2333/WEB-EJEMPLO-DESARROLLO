@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Desarrollo Personal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+  <h1>Tu Panel de Desarrollo Personal</h1>
+  <nav id="nav">
+    <button data-view="dashboard">Dashboard</button>
+    <button data-view="goals">Objetivos</button>
+    <button data-view="habits">Hábitos</button>
+    <button data-view="journal">Diario</button>
+    <button data-view="tasks">Tareas</button>
+    <button id="logoutBtn">Salir</button>
+  </nav>
+</header>
+<main>
+  <section id="authSection">
+    <h2>Acceso</h2>
+    <div class="auth-forms">
+      <form id="registerForm">
+        <h3>Registro</h3>
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button>Crear cuenta</button>
+        <div class="msg" data-msg-register></div>
+      </form>
+      <form id="loginForm">
+        <h3>Login</h3>
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button>Entrar</button>
+        <div class="msg" data-msg-login></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="dashboardView" class="appView hidden">
+    <h2>Dashboard</h2>
+    <div class="cards" id="dashboardCards"></div>
+    <canvas id="progressChart" height="120"></canvas>
+  </section>
+
+  <section id="goalsView" class="appView hidden">
+    <h2>Objetivos</h2>
+    <form id="goalForm">
+      <input name="title" placeholder="Título" required />
+      <input name="target_date" type="date" />
+      <textarea name="description" placeholder="Descripción"></textarea>
+      <button>Agregar</button>
+    </form>
+    <ul id="goalsList"></ul>
+  </section>
+
+  <section id="habitsView" class="appView hidden">
+    <h2>Hábitos</h2>
+    <form id="habitForm">
+      <input name="name" placeholder="Hábito" required />
+      <select name="frequency">
+        <option value="daily">Diario</option>
+        <option value="weekly">Semanal</option>
+      </select>
+      <button>Agregar</button>
+    </form>
+    <ul id="habitsList"></ul>
+  </section>
+
+  <section id="journalView" class="appView hidden">
+    <h2>Diario</h2>
+    <form id="journalForm">
+      <input name="title" placeholder="Título opcional" />
+      <select name="mood">
+        <option value="">Estado de ánimo</option>
+        <option>Feliz</option>
+        <option>Enfocado</option>
+        <option>Ansioso</option>
+        <option>Calmado</option>
+      </select>
+      <textarea name="content" placeholder="Escribe tu entrada..." required></textarea>
+      <button>Guardar</button>
+    </form>
+    <div id="journalEntries"></div>
+  </section>
+
+  <section id="tasksView" class="appView hidden">
+    <h2>Tareas</h2>
+    <form id="taskForm">
+      <input name="title" placeholder="Nueva tarea" required />
+      <select name="priority">
+        <option value="low">Baja</option>
+        <option value="normal" selected>Normal</option>
+        <option value="high">Alta</option>
+      </select>
+      <input type="date" name="due_date" />
+      <button>Agregar</button>
+    </form>
+    <ul id="tasksList"></ul>
+  </section>
+</main>
+<footer>
+  <small>© 2025 Desarrollo Personal</small>
+</footer>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { authRequired } from '../middleware/auth.js';
+import { listTasks, addTask, patchTask, removeTask } from '../controllers/tasks.controller.js';
+const router = Router();
+router.use(authRequired);
+router.get('/', listTasks);
+router.post('/', addTask);
+router.patch('/:id', patchTask);
+router.delete('/:id', removeTask);
+export default router;

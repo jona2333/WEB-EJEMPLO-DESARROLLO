@@ -1,0 +1,11 @@
+import { Router } from 'express';
+import { authRequired } from '../middleware/auth.js';
+import { listHabits, addHabit, removeHabit, log, logs } from '../controllers/habits.controller.js';
+const router = Router();
+router.use(authRequired);
+router.get('/', listHabits);
+router.post('/', addHabit);
+router.delete('/:id', removeHabit);
+router.post('/log', log);
+router.get('/:id/logs', logs);
+export default router;

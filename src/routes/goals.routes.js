@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { authRequired } from '../middleware/auth.js';
+import { listGoals, addGoal, patchGoal, removeGoal } from '../controllers/goals.controller.js';
+const router = Router();
+router.use(authRequired);
+router.get('/', listGoals);
+router.post('/', addGoal);
+router.patch('/:id', patchGoal);
+router.delete('/:id', removeGoal);
+export default router;
