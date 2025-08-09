@@ -12,6 +12,24 @@ const viewMap = {
   tasks:'tasksView'
 };
 
+// Toast notification system
+export function showToast(message, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  // Auto remove after 3 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+  
+  // Remove on click
+  toast.addEventListener('click', () => {
+    toast.remove();
+  });
+}
+
 export function showView(key){
   document.querySelectorAll('.appView').forEach(v=>v.classList.add('hidden'));
   const id=viewMap[key];

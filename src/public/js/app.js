@@ -1,11 +1,14 @@
-import { api, setToken } from './api.js';
-import { showAppUI, showAuthUI, showView } from './views.js';
+import { api, setToken, setRefreshToken } from './api.js';
+import { showAppUI, showAuthUI, showView, showToast } from './views.js';
 
 document.getElementById('nav').addEventListener('click', e=>{
   if(e.target.matches('button[data-view]')) showView(e.target.dataset.view);
 });
+
 document.getElementById('logoutBtn').addEventListener('click',()=>{
   setToken(null);
+  setRefreshToken(null);
+  showToast('Sesión cerrada', 'info');
   showAuthUI();
 });
 
@@ -18,12 +21,18 @@ registerForm.addEventListener('submit', async e=>{
   const { email, password }=Object.fromEntries(fd.entries());
   const msg=registerForm.querySelector('[data-msg-register]');
   msg.textContent='...';
+  
   try{
-    const { token }=await api.register(email,password);
+    const { token, refreshToken }=await api.register(email,password);
     setToken(token);
+    setRefreshToken(refreshToken);
+    showToast('¡Registrado exitosamente!', 'success');
     msg.textContent='Registrado';
     showAppUI();
-  }catch(err){ msg.textContent=err.message; }
+  }catch(err){ 
+    msg.textContent=err.message;
+    showToast(err.message, 'error');
+  }
 });
 
 loginForm.addEventListener('submit', async e=>{
@@ -32,10 +41,16 @@ loginForm.addEventListener('submit', async e=>{
   const { email, password }=Object.fromEntries(fd.entries());
   const msg=loginForm.querySelector('[data-msg-login]');
   msg.textContent='...';
+  
   try{
-    const { token }=await api.login(email,password);
+    const { token, refreshToken }=await api.login(email,password);
     setToken(token);
+    setRefreshToken(refreshToken);
+    showToast('¡Bienvenido!', 'success');
     msg.textContent='Bienvenido';
     showAppUI();
-  }catch(err){ msg.textContent=err.message; }
+  }catch(err){ 
+    msg.textContent=err.message;
+    showToast(err.message, 'error');
+  }
 });

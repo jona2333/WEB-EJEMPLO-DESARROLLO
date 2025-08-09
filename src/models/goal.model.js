@@ -4,8 +4,22 @@ export function createGoal(user_id, { title, description, target_date }) {
     .run(user_id, title, description, target_date || null);
   return getGoal(info.lastInsertRowid, user_id);
 }
-export function getGoals(user_id) {
-  return db.prepare('SELECT * FROM goals WHERE user_id=? ORDER BY created_at DESC').all(user_id);
+export function getGoals(user_id, page = 1, limit = 10) {
+  const offset = (page - 1) * limit;
+  const goals = db.prepare('SELECT * FROM goals WHERE user_id=? ORDER BY created_at DESC LIMIT ? OFFSET ?').all(user_id, limit, offset);
+  const total = db.prepare('SELECT COUNT(*) as count FROM goals WHERE user_id=?').get(user_id).count;
+  
+  return {
+    goals,
+    pagination: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+      hasNext: page < Math.ceil(total / limit),
+      hasPrev: page > 1
+    }
+  };
 }
 export function getGoal(id, user_id) {
   return db.prepare('SELECT * FROM goals WHERE id=? AND user_id=?').get(id, user_id);

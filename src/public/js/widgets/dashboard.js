@@ -1,8 +1,14 @@
 import { api } from '../api.js';
+import { showToast } from '../views.js';
+
 let chart;
+
 export async function renderDashboard(){
   const container=document.getElementById('dashboardCards');
-  container.innerHTML='Cargando...';
+  
+  // Show loading spinner
+  container.innerHTML='<div class="spinner"></div>';
+  
   try{
     const data=await api.dashboard();
     container.innerHTML=`
@@ -16,8 +22,10 @@ export async function renderDashboard(){
     renderChart(data);
   }catch(e){
     container.innerHTML=`<span style="color:#f66">${e.message}</span>`;
+    showToast('Error al cargar dashboard', 'error');
   }
 }
+
 function renderChart(d){
   const ctx=document.getElementById('progressChart').getContext('2d');
   if(chart) chart.destroy();
